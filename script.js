@@ -31,16 +31,22 @@ let operator = "";
 
 const calculator = new Calculate();
 let digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
+let operatorButtons = document.querySelectorAll(".operator");
 
-digitButtons.forEach(
+digitButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        input[inputIndex] += button.innerHTML;
+        console.log("Input so far: ", input);
+    });
+});
+
+operatorButtons.forEach(
     function (button) {
         button.addEventListener("click", function() {
-            if (inputIndex === 0) {
-                input[inputIndex] += button.innerHTML;
-                console.log("Input so far: ", input);
-            }
+            operator = button.innerHTML;
+            console.log("Operator: ", operator);
+            inputIndex = 1;
         });
     }
 );
-
 
