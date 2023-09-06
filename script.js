@@ -1,3 +1,18 @@
+
+
+/*
+
+Check git log to review
+Next to do: Update function when operator is clicked
+Next to do: Create clear
+
+*/
+
+
+/* ARCHIVE
+
+
+
 function Calculate() {
     this.methods = {
         "+": function (firstNum, secondNum) {
@@ -35,10 +50,10 @@ function Calculate() {
 
 function UpdateDisplay() { // Might delete
 
-    if (displayStatus === "firstNum") {
-        mainDisplay.textContent = input[0];
-    } else if (displayStatus === "operator") {
+    if (displayStatus === "operator") {
         historyDisplay.textContent = mainDisplay.textContent + operator;
+    } else {
+        mainDisplay.textContent = input[inputIndex];
     }
 
     // this.updateHistoryDisplay = function() {
@@ -95,10 +110,6 @@ equalButton.addEventListener("click", function() {
     calculator.getResult(input[0], input[1], operator);
 });
 
-/*
 
-Check git log to review
-Next to do: Update function when operator is clicked
-Next to do: Create clear
 
 */
