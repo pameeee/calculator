@@ -33,18 +33,29 @@ function Calculate() {
 
 }
 
+function updateDisplay() { // Might delete
+    if (displayStatus === "firstNum") {
+        mainDisplay.textContent = input[inputIndex];
+    }
+}
+
 let input = ["", ""];
 let inputIndex = 0;
+let displayStatus = "firstNum"; // Might delete
 let operator = "";
 
 const calculator = new Calculate();
-let digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
-let operatorButtons = document.querySelectorAll(".operator");
-let equalButton = document.querySelector("#equal");
+const digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
+const operatorButtons = document.querySelectorAll(".operator");
+const equalButton = document.querySelector("#equal");
+const historyDisplay = document.getElementById("historyDisplay");
+const mainDisplay = document.getElementById("mainDisplay");
+
 
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         input[inputIndex] += button.innerHTML;
+        updateDisplay();
         console.log("Input so far: ", input);
     });
 });
@@ -64,3 +75,11 @@ operatorButtons.forEach(
 equalButton.addEventListener("click", function() {
     calculator.getResult(input[0], input[1], operator);
 });
+
+/*
+
+Check git log to review
+Next to do: Update function when operator is clicked
+Next to do: Create clear
+
+*/
