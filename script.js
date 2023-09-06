@@ -33,16 +33,30 @@ function Calculate() {
 
 }
 
-function updateDisplay() { // Might delete
+function UpdateDisplay() { // Might delete
+
     if (displayStatus === "firstNum") {
-        mainDisplay.textContent = input[inputIndex];
+        mainDisplay.textContent = input[0];
+    } else if (displayStatus === "operator") {
+        historyDisplay.textContent = mainDisplay.textContent + operator;
     }
+
+    // this.updateHistoryDisplay = function() {
+    //     historyDisplay.textContent += operator;
+    //     console.log("Operator: ", operator);
+    //     console.log("Operator type: ", typeof operator);
+    // }
+
+    // this.updateMainDisplay = function() {
+    //     mainDisplay.textContent = input[0];
+    // }
+
 }
 
 let input = ["", ""];
 let inputIndex = 0;
 let displayStatus = "firstNum"; // Might delete
-let operator = "";
+let operator = ""; 
 
 const calculator = new Calculate();
 const digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
@@ -51,23 +65,28 @@ const equalButton = document.querySelector("#equal");
 const historyDisplay = document.getElementById("historyDisplay");
 const mainDisplay = document.getElementById("mainDisplay");
 
+// const updateDisplayInstance = new UpdateDisplay();
+
 
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         input[inputIndex] += button.innerHTML;
-        updateDisplay();
         console.log("Input so far: ", input);
+        UpdateDisplay();
     });
 });
 
 operatorButtons.forEach(
     function (button) {
         button.addEventListener("click", function() {
+            displayStatus = "operator";
             input[1] = "";
             operator = button.innerHTML;
             console.log("Input so far: ", input);
             console.log("Operator: ", operator);
             inputIndex = 1;
+            
+            UpdateDisplay();
         });
     }
 );
