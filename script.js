@@ -1,3 +1,23 @@
+let input = ["", ""]
+let inputIndex = 0;
+
+const digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
+const mainDisplay = document.getElementById("mainDisplay");
+
+function updateDisplay() {
+    //
+}
+
+
+digitButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        input[inputIndex] += button.innerHTML;
+        console.log("Input: ", input);
+    });
+});
+
+
+
 
 
 /*
@@ -7,6 +27,8 @@ Next to do: Update function when operator is clicked
 Next to do: Create clear
 
 */
+
+
 
 
 /* ARCHIVE
