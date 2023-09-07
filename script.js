@@ -1,20 +1,40 @@
 let input = ["", ""]
 let inputIndex = 0;
+let operator = "";
 
 const digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
+const operatorButtons = document.querySelectorAll(".operator");
 const mainDisplay = document.getElementById("mainDisplay");
+const historyDisplay = document.getElementById("historyDisplay");
 
-function updateDisplay() {
-    //
+function updateMainDisplay() {
+
+    mainDisplay.textContent = input[inputIndex];
+
+}
+
+function updateHistoryDisplay() {
+    historyDisplay.textContent = input[0] + " " + operator;
 }
 
 
 digitButtons.forEach(function(button) {
     button.addEventListener("click", function() {
         input[inputIndex] += button.innerHTML;
+        updateMainDisplay();
         console.log("Input: ", input);
     });
 });
+
+operatorButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        operator = button.innerHTML;
+        updateHistoryDisplay();
+    });
+}
+);
+
+
 
 
 
@@ -23,7 +43,7 @@ digitButtons.forEach(function(button) {
 /*
 
 Check git log to review
-Next to do: Update function when operator is clicked
+Next to do: Update main display
 Next to do: Create clear
 
 */
