@@ -5,6 +5,7 @@ let operator = "";
 const digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalButton = document.getElementById("equal");
+const clearButton = document.getElementById("clear");
 const mainDisplay = document.getElementById("mainDisplay");
 const historyDisplay = document.getElementById("historyDisplay");
 
@@ -93,7 +94,14 @@ equalButton.addEventListener("click", function() {
 
 });
 
+clearButton.addEventListener("click", function() {
+    input = ["", ""];
+    inputIndex = 0;
+    operator = "";
 
+    mainDisplay.textContent = 0;
+    historyDisplay.textContent = "";
+});
 
 
 
