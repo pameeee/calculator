@@ -4,6 +4,7 @@ let operator = "";
 
 const digitButtons = document.querySelectorAll("button:not(#equal):not(.operator)");
 const operatorButtons = document.querySelectorAll(".operator");
+const equalButton = document.getElementById("equal");
 const mainDisplay = document.getElementById("mainDisplay");
 const historyDisplay = document.getElementById("historyDisplay");
 
@@ -17,6 +18,37 @@ function updateHistoryDisplay() {
     historyDisplay.textContent = input[0] + " " + operator;
 }
 
+function calculate() {
+    
+    this.methods = {
+        "+": function (firstNum, secondNum) {
+            return firstNum + secondNum
+        },
+
+        "-": function (firstNum, secondNum) {
+            return firstNum - secondNum
+        },
+
+        "*": function (firstNum, secondNum) {
+            return firstNum * secondNum
+        },
+
+        "/": function (firstNum, secondNum) {
+            return firstNum / secondNum
+        },
+    };
+
+    // this.getResult = function(firstNum, secondNum, op) {
+    //     const result = this.methods[op](parseInt(firstNum), parseInt(secondNum));
+    //     // input[0] = result.toString();
+    //     // inputIndex = 0;
+    //     console.log("Result: ", result);
+    // }
+
+
+
+}
+
 
 digitButtons.forEach(function(button) {
     button.addEventListener("click", function() {
@@ -26,14 +58,18 @@ digitButtons.forEach(function(button) {
     });
 });
 
-operatorButtons.forEach(function(button) {
-    button.addEventListener("click", function() {
+operatorButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        inputIndex = 1;
         operator = button.innerHTML;
         updateHistoryDisplay();
     });
-}
-);
+});
 
+equalButton.addEventListener("click", function() {
+    // calculator.getResult(input[0], input[1], operator);
+    console.log("Equal button clicked");
+});
 
 
 
@@ -43,7 +79,9 @@ operatorButtons.forEach(function(button) {
 /*
 
 Check git log to review
-Next to do: Update main display
+Next to do: When to toggle inputIndex ?
+(?) Should there be another status variable -> status either digit or operator
+
 Next to do: Create clear
 
 */
