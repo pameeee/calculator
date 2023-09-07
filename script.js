@@ -57,14 +57,25 @@ digitButtons.forEach(function(button) {
         input[inputIndex] += button.innerHTML;
         updateMainDisplay();
         console.log("Input: ", input);
+        console.log("inputIndex: ", inputIndex);
+        console.log("Result: ", result);
     });
 });
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
+
+        if (!input[0]) {
+            input[0] = "0";
+        }
+
         inputIndex = 1;
         operator = button.innerHTML;
         updateHistoryDisplay();
+
+        console.log("Input: ", input);
+        console.log("inputIndex: ", inputIndex);
+        console.log("Result: ", result);
     });
 });
 
@@ -73,6 +84,13 @@ equalButton.addEventListener("click", function() {
     updateHistoryDisplay();
     const result = calculate();
     updateMainDisplay(result);
+
+    input = [result.toString(), ""]
+
+    console.log("Input: ", input);
+    console.log("inputIndex: ", inputIndex);
+    console.log("Result: ", result);
+
 });
 
 
