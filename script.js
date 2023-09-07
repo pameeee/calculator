@@ -8,18 +8,26 @@ const equalButton = document.getElementById("equal");
 const mainDisplay = document.getElementById("mainDisplay");
 const historyDisplay = document.getElementById("historyDisplay");
 
-function updateMainDisplay() {
+function updateMainDisplay(result) {
 
-    mainDisplay.textContent = input[inputIndex];
+    if (!result) {
+        mainDisplay.textContent = input[inputIndex];
+    } else {
+        mainDisplay.textContent = result;
+    }
 
 }
 
 function updateHistoryDisplay() {
-    historyDisplay.textContent = input[0] + " " + operator;
+    if (inputIndex === 1) {
+        historyDisplay.textContent = input[0] + " " + operator;
+    } else {
+        historyDisplay.textContent = input[0] + " " + operator + " " + input[1] + " " + "=";
+    }
 }
 
 function calculate() {
-    
+
     this.methods = {
         "+": function (firstNum, secondNum) {
             return firstNum + secondNum
@@ -38,14 +46,8 @@ function calculate() {
         },
     };
 
-    // this.getResult = function(firstNum, secondNum, op) {
-    //     const result = this.methods[op](parseInt(firstNum), parseInt(secondNum));
-    //     // input[0] = result.toString();
-    //     // inputIndex = 0;
-    //     console.log("Result: ", result);
-    // }
-
-
+    const result = this.methods[operator](parseFloat(input[0]), parseFloat(input[1]));
+    return result
 
 }
 
@@ -67,8 +69,10 @@ operatorButtons.forEach(function (button) {
 });
 
 equalButton.addEventListener("click", function() {
-    // calculator.getResult(input[0], input[1], operator);
-    console.log("Equal button clicked");
+    inputIndex = 0;
+    updateHistoryDisplay();
+    const result = calculate();
+    updateMainDisplay(result);
 });
 
 
@@ -79,9 +83,8 @@ equalButton.addEventListener("click", function() {
 /*
 
 Check git log to review
-Next to do: When to toggle inputIndex ?
-(?) Should there be another status variable -> status either digit or operator
 
+Next to do: Calculate and display result in mainDisplay
 Next to do: Create clear
 
 */
