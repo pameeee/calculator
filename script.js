@@ -13,7 +13,10 @@ const historyDisplay = document.getElementById("historyDisplay");
 
 
 function updateMainDisplay(result) {
-    if (currentStat === "firstNumber") {
+    if (result) {
+        mainDisplay.textContent = result;
+    }
+    else if (currentStat === "firstNumber") {
         mainDisplay.textContent = input[0];
     } else if (currentStat === "secondNumber") {
         mainDisplay.textContent = input[1];
@@ -51,7 +54,6 @@ function calculate() {
                 100
         ) / 100;
 
-    console.log("Result: ", result);
     return result;
 }
 
@@ -90,8 +92,10 @@ operatorButtons.forEach(function (button) {
     });
 });
 
-equalButton.addEventListener("click", function() {
-    calculate();
+equalButton.addEventListener("click", function () {
+    let result = calculate();
+    updateMainDisplay(result);
+    result = "";
 });
 
 
