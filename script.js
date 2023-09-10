@@ -1,5 +1,4 @@
 let input = ["", ""];
-// let inputIndex = 0;
 let operator = "";
 let currentStat = "firstNumber";
 
@@ -90,7 +89,7 @@ operatorButtons.forEach(function (button) {
         }
 
         operator = button.innerHTML;
-        input[1] = ""; //new
+        input[1] = "";
 
         updateHistoryDisplay();
 
@@ -108,7 +107,7 @@ equalButton.addEventListener("click", function () {
     let result = calculate();
     updateMainDisplay(result);
     updateHistoryDisplay();
-    input[0] = result; //new
+    input[0] = result;
     result = "";
 
     currentStat = "equal";
@@ -119,6 +118,12 @@ equalButton.addEventListener("click", function () {
     console.log("Status: ", currentStat);
 });
 
+
+// To do
+// Operator immediately instead of click equal
+// Clicking equal continuously
+// Clear
+// Decimal
 
 
 
