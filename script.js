@@ -24,7 +24,7 @@ function updateMainDisplay(result) {
 }
 
 function updateHistoryDisplay() {
-    if (currentStat === "firstNumber") {
+    if (currentStat === "firstNumber" || currentStat === "equal") {
         historyDisplay.textContent = input[0] + " " + operator;
     } else if (currentStat === "secondNumber") {
         historyDisplay.textContent =
@@ -50,6 +50,13 @@ function calculate() {
             return firstNum / secondNum;
         },
     };
+
+    console.log("Input[1]: ", input[1]);
+    console.log("Operator: ", operator);
+
+    if (input[1] === "0" && operator === "/") {
+        return "Cannot be divided by zero";
+    }
 
     const result =
         Math.round(
@@ -83,6 +90,7 @@ operatorButtons.forEach(function (button) {
         }
 
         operator = button.innerHTML;
+        input[1] = ""; //new
 
         updateHistoryDisplay();
 
@@ -96,12 +104,19 @@ operatorButtons.forEach(function (button) {
 });
 
 equalButton.addEventListener("click", function () {
+
     let result = calculate();
     updateMainDisplay(result);
     updateHistoryDisplay();
+    input[0] = result; //new
     result = "";
 
+    currentStat = "equal";
+
     console.log("Result: ", result);
+    console.log("Input: ", input);
+    console.log("Operator: ", operator);
+    console.log("Status: ", currentStat);
 });
 
 
