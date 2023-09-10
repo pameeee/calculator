@@ -1,10 +1,8 @@
 let input = ["", ""];
-let inputIndex = 0;
+// let inputIndex = 0;
 let operator = "";
+let currentStat = "firstNumber";
 
-// const digitButtons = document.querySelectorAll(
-//     "button:not(#equal):not(.operator)"
-// );
 const digitButtons = document.querySelectorAll(".digit");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalButton = document.getElementById("equal");
@@ -13,16 +11,81 @@ const decimalButton = document.getElementById("decimal");
 const mainDisplay = document.getElementById("mainDisplay");
 const historyDisplay = document.getElementById("historyDisplay");
 
-// decimalButton.disabled = true;
 
-// if (button) {
-//     // Check if the button exists in the DOM
-//     button.disabled = true;
-//     button.style.backgroundColor = "red";
-//   } else {
-//     console.error("Button not found in the DOM.");
-//   }
-// });
+function updateMainDisplay(result) {
+    if (currentStat === "firstNumber") {
+        mainDisplay.textContent = input[0];
+    }
+}
+
+function updateHistoryDisplay() {
+    if (currentStat === "firstNumber") {
+        historyDisplay.textContent = input[0] + " " + operator;
+    }
+}
+
+digitButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        if (currentStat === "firstNumber") {
+            input[0] += button.innerHTML;
+        }
+
+        updateMainDisplay();
+
+        console.log("Input: ", input);
+        console.log("Operator: ", operator);
+        console.log("Status: ", currentStat);
+    });
+});
+
+operatorButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        // currentStat = "operator";
+        operator = button.innerHTML;
+
+        updateHistoryDisplay();
+
+        console.log("Input: ", input);
+        console.log("Operator: ", operator);
+        console.log("Status: ", currentStat);
+    });
+});
+
+
+
+
+/*
+        console.log("Input: ", input);
+        console.log("Current input: ", inputIndex);
+        console.log("Decimal button disabled: ", decimalButton.disabled);
+
+/*
+
+Check git log to review
+
+Next to do: decimals
+
+Next to do: if another operator is clicked instead of equal sigh:
+run equalButton first then proceed with historyDisplay update.
+
+*/
+
+
+
+
+/* ARCHIVE
+
+let input = ["", ""];
+let inputIndex = 0;
+let operator = "";
+
+const digitButtons = document.querySelectorAll(".digit");
+const operatorButtons = document.querySelectorAll(".operator");
+const equalButton = document.getElementById("equal");
+const clearButton = document.getElementById("clear");
+const decimalButton = document.getElementById("decimal");
+const mainDisplay = document.getElementById("mainDisplay");
+const historyDisplay = document.getElementById("historyDisplay");
 
 function updateMainDisplay(result) {
     if (!result) {
@@ -70,11 +133,6 @@ function calculate() {
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         input[inputIndex] += button.innerHTML;
-        // if input[inputIndex] already has one ".", then disable the decimal button
-
-        // if (input[inputIndex].includes(".")) {
-        //     decimalButton.disabled = true;
-        // }
 
         if (input[inputIndex].includes(".")) {
             decimalButton.disabled = true;
@@ -90,6 +148,7 @@ digitButtons.forEach(function (button) {
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
+        
         if (!input[0]) {
             input[0] = "0";
         }
@@ -113,7 +172,7 @@ equalButton.addEventListener("click", function () {
 
     inputIndex = 0;
     updateHistoryDisplay();
-    
+
     const result = calculate();
     updateMainDisplay(result);
 
@@ -143,3 +202,4 @@ Next to do: if another operator is clicked instead of equal sigh:
 run equalButton first then proceed with historyDisplay update.
 
 */
+
