@@ -26,7 +26,10 @@ function updateMainDisplay(result) {
 function updateHistoryDisplay() {
     if (currentStat === "firstNumber") {
         historyDisplay.textContent = input[0] + " " + operator;
-    } 
+    } else if (currentStat === "secondNumber") {
+        historyDisplay.textContent =
+            input[0] + " " + operator + " " + input[1] + " " + "=";
+    }
 }
 
 function calculate() {
@@ -95,7 +98,10 @@ operatorButtons.forEach(function (button) {
 equalButton.addEventListener("click", function () {
     let result = calculate();
     updateMainDisplay(result);
+    updateHistoryDisplay();
     result = "";
+
+    console.log("Result: ", result);
 });
 
 
