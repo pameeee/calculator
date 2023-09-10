@@ -15,19 +15,23 @@ const historyDisplay = document.getElementById("historyDisplay");
 function updateMainDisplay(result) {
     if (currentStat === "firstNumber") {
         mainDisplay.textContent = input[0];
+    } else if (currentStat === "secondNumber") {
+        mainDisplay.textContent = input[1];
     }
 }
 
 function updateHistoryDisplay() {
     if (currentStat === "firstNumber") {
         historyDisplay.textContent = input[0] + " " + operator;
-    }
+    } 
 }
 
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         if (currentStat === "firstNumber") {
             input[0] += button.innerHTML;
+        } else if (currentStat === "secondNumber") {
+            input[1] += button.innerHTML;
         }
 
         updateMainDisplay();
@@ -40,10 +44,12 @@ digitButtons.forEach(function (button) {
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-        // currentStat = "operator";
         operator = button.innerHTML;
 
         updateHistoryDisplay();
+
+        currentStat = "secondNumber";
+        
 
         console.log("Input: ", input);
         console.log("Operator: ", operator);
