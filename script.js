@@ -26,6 +26,35 @@ function updateHistoryDisplay() {
     } 
 }
 
+function calculate() {
+    this.methods = {
+        "+": function (firstNum, secondNum) {
+            return firstNum + secondNum;
+        },
+
+        "-": function (firstNum, secondNum) {
+            return firstNum - secondNum;
+        },
+
+        "*": function (firstNum, secondNum) {
+            return firstNum * secondNum;
+        },
+
+        "/": function (firstNum, secondNum) {
+            return firstNum / secondNum;
+        },
+    };
+
+    const result =
+        Math.round(
+            this.methods[operator](parseFloat(input[0]), parseFloat(input[1])) *
+                100
+        ) / 100;
+
+    console.log("Result: ", result);
+    return result;
+}
+
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         if (currentStat === "firstNumber") {
@@ -59,6 +88,10 @@ operatorButtons.forEach(function (button) {
         console.log("Operator: ", operator);
         console.log("Status: ", currentStat);
     });
+});
+
+equalButton.addEventListener("click", function() {
+    calculate();
 });
 
 
