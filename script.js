@@ -44,6 +44,10 @@ digitButtons.forEach(function (button) {
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
+        if (currentStat === "firstNumber" && input[0] === "") {
+            input[0] = "0";
+        }
+
         operator = button.innerHTML;
 
         updateHistoryDisplay();
