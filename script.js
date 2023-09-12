@@ -1,6 +1,6 @@
 let input = ["", ""];
 let operator = "";
-let currentStat = "firstNumber";
+let currentStat = 0;
 let equal = false;
 
 const digitButtons = document.querySelectorAll(".digit");
@@ -16,19 +16,16 @@ function updateMainDisplay(result) {
     if (result) {
         mainDisplay.textContent = result;
     }
-    else if (currentStat === "firstNumber") {
-        mainDisplay.textContent = input[0];
-    } else if (currentStat === "secondNumber") {
-        mainDisplay.textContent = input[1];
+    else if (currentStat === 0) {
+        mainDisplay.textContent = input[currentStat];
+    } else if (currentStat === 1) {
+        mainDisplay.textContent = input[currentStat];
     }
 
 }
 
 function updateHistoryDisplay() {
 
-    // if (equal && input[0] && input[1]) {
-    //     historyDisplay.textContent = input[0] + " " + operator;
-    // }
     if (equal) {
         historyDisplay.textContent = input[0] + " " + operator + " " + input[1] + " " + "=";
     } else {
@@ -70,10 +67,10 @@ function calculate() {
 
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-        if (currentStat === "firstNumber") {
-            input[0] += button.innerHTML;
-        } else if (currentStat === "secondNumber") {
-            input[1] += button.innerHTML;
+        if (currentStat === 0) {
+            input[currentStat] += button.innerHTML;
+        } else if (currentStat === 1) {
+            input[currentStat] += button.innerHTML;
         }
 
         updateMainDisplay();
@@ -87,7 +84,7 @@ digitButtons.forEach(function (button) {
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
 
-        if (currentStat === "firstNumber" && input[0] === "") {
+        if (currentStat === 0 && input[currentStat] === "") {
             input[0] = "0";
         }
 
@@ -103,7 +100,7 @@ operatorButtons.forEach(function (button) {
         updateHistoryDisplay();
 
         input[1] = "";
-        currentStat = "secondNumber";
+        currentStat = 1;
 
         console.log("Input: ", input);
         console.log("Operator: ", operator);
@@ -125,6 +122,17 @@ equalButton.addEventListener("click", function () {
     console.log("Operator: ", operator);
     console.log("Status: ", currentStat);
 });
+
+// To do
+// Decimal
+// Clear button
+// New number after equal
+// Backspace
+// Clean, refactor, and rearrange - try to merge updateDisplay, use ternary operator
+
+// Different color buttons
+// Keyboard
+
 
 
 // equalButton.addEventListener("click", function () {
@@ -176,12 +184,6 @@ equalButton.addEventListener("click", function () {
 
 
 
-// To do
-// Operator immediately instead of click equal
-// Clicking equal continuously
-// Clear
-// Decimal
-// Clean, refactor, and rearrange - try to merge updateDisplay
 
 
 
