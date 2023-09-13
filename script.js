@@ -8,6 +8,7 @@ const operatorButtons = document.querySelectorAll(".operator");
 const equalButton = document.getElementById("equal");
 const clearButton = document.getElementById("clear");
 const decimalButton = document.getElementById("decimal");
+const backspaceButton = document.getElementById("backspace");
 const mainDisplay = document.getElementById("mainDisplay");
 const historyDisplay = document.getElementById("historyDisplay");
 
@@ -38,6 +39,8 @@ function updateHistoryDisplay() {
 }
 
 function calculate() {
+
+    console.log("Operands: ", input);
     this.methods = {
         "+": function (firstNum, secondNum) {
             return firstNum + secondNum;
@@ -66,7 +69,7 @@ function calculate() {
                 100
         ) / 100;
 
-    return result;
+    return result.toString();
 }
 
 digitButtons.forEach(function (button) {
@@ -91,8 +94,8 @@ operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         decimalButton.disabled = false;
 
-        if (currentStat === 0 && input[currentStat] === "") {
-            input[0] = "0";
+        if (input[currentStat] === "") {
+            input[currentStat] = "0";
         }
 
         if (input[0] && input[1] && !equal) {
@@ -136,6 +139,19 @@ clearButton.addEventListener("click", function () {
 
     consoleLog();
 });
+
+backspaceButton.addEventListener("click", function () {
+    input[currentStat] = input[currentStat].slice(0, input[currentStat].length - 1);
+    if (input[currentStat] === "") {
+        // mainDisplay.textContent = 0;
+        input[currentStat] = "0"
+    }
+    updateMainDisplay();
+    updateHistoryDisplay();
+    consoleLog();
+});
+
+
 
 // clearButton.addEventListener("click", function () {
 //     input = ["", ""];
