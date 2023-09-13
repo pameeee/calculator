@@ -11,9 +11,16 @@ const decimalButton = document.getElementById("decimal");
 const mainDisplay = document.getElementById("mainDisplay");
 const historyDisplay = document.getElementById("historyDisplay");
 
+function consoleLog() {
+    console.log("Input: ", input);
+    console.log("Operator: ", operator);
+    console.log("Status: ", currentStat);
+    console.log("Decimal button disabled: ", decimalButton.disabled);
+}
+
 function updateMainDisplay(result) {
 
-    if (result) {
+    if (result || result === 0) {
         mainDisplay.textContent = result;
     }
     else if (currentStat === 0) {
@@ -72,17 +79,21 @@ digitButtons.forEach(function (button) {
         } else if (currentStat === 1) {
             input[currentStat] += button.innerHTML;
         }
+        
+        if (input[currentStat].includes(".")) {
+            decimalButton.disabled = true;
+        }
 
         updateMainDisplay();
 
-        console.log("Input: ", input);
-        console.log("Operator: ", operator);
-        console.log("Status: ", currentStat);
+        consoleLog();
     });
 });
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
+
+        decimalButton.disabled = false;
 
         if (currentStat === 0 && input[currentStat] === "") {
             input[0] = "0";
@@ -102,13 +113,13 @@ operatorButtons.forEach(function (button) {
         input[1] = "";
         currentStat = 1;
 
-        console.log("Input: ", input);
-        console.log("Operator: ", operator);
-        console.log("Status: ", currentStat);
+        consoleLog();
     });
 });
 
 equalButton.addEventListener("click", function () {
+
+    decimalButton.disabled = false;
 
     equal = true;
 
@@ -117,17 +128,14 @@ equalButton.addEventListener("click", function () {
     updateHistoryDisplay();
     input[0] = result;
 
-    console.log("Result: ", result);
-    console.log("Input: ", input);
-    console.log("Operator: ", operator);
-    console.log("Status: ", currentStat);
+    consoleLog();
 });
 
 // To do
 // Decimal
+// Backspace
 // Clear button
 // New number after equal
-// Backspace
 // Clean, refactor, and rearrange - try to merge updateDisplay, use ternary operator
 
 // Different color buttons
