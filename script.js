@@ -19,22 +19,19 @@ function consoleLog() {
 }
 
 function updateMainDisplay(result) {
-
     if (result || result === 0) {
         mainDisplay.textContent = result;
-    }
-    else if (currentStat === 0) {
+    } else if (currentStat === 0) {
         mainDisplay.textContent = input[currentStat];
     } else if (currentStat === 1) {
         mainDisplay.textContent = input[currentStat];
     }
-
 }
 
 function updateHistoryDisplay() {
-
     if (equal) {
-        historyDisplay.textContent = input[0] + " " + operator + " " + input[1] + " " + "=";
+        historyDisplay.textContent =
+            input[0] + " " + operator + " " + input[1] + " " + "=";
     } else {
         historyDisplay.textContent = input[0] + " " + operator;
     }
@@ -79,7 +76,7 @@ digitButtons.forEach(function (button) {
         } else if (currentStat === 1) {
             input[currentStat] += button.innerHTML;
         }
-        
+
         if (input[currentStat].includes(".")) {
             decimalButton.disabled = true;
         }
@@ -92,7 +89,6 @@ digitButtons.forEach(function (button) {
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-
         decimalButton.disabled = false;
 
         if (currentStat === 0 && input[currentStat] === "") {
@@ -118,7 +114,6 @@ operatorButtons.forEach(function (button) {
 });
 
 equalButton.addEventListener("click", function () {
-
     decimalButton.disabled = false;
 
     equal = true;
@@ -131,8 +126,27 @@ equalButton.addEventListener("click", function () {
     consoleLog();
 });
 
+clearButton.addEventListener("click", function () {
+    input = ["", ""];
+    operator = "";
+    currentStat = 0;
+    equal = false;
+    mainDisplay.textContent = 0;
+    historyDisplay.textContent = "";
+
+    consoleLog();
+});
+
+// clearButton.addEventListener("click", function () {
+//     input = ["", ""];
+//     inputIndex = 0;
+//     operator = "";
+
+//     mainDisplay.textContent = 0;
+//     historyDisplay.textContent = "";
+// });
+
 // To do
-// Decimal
 // Backspace
 // Clear button
 // New number after equal
