@@ -72,6 +72,14 @@ function calculate() {
     return result.toString();
 }
 
+function checkDecimal() {
+    if (input[currentStat].includes(".")) {
+        decimalButton.disabled = true;
+    } else {
+        decimalButton.disabled = false;
+    }
+}
+
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         if (currentStat === 0) {
@@ -80,10 +88,7 @@ digitButtons.forEach(function (button) {
             input[currentStat] += button.innerHTML;
         }
 
-        if (input[currentStat].includes(".")) {
-            decimalButton.disabled = true;
-        }
-
+        checkDecimal();
         updateMainDisplay();
 
         consoleLog();
@@ -143,9 +148,9 @@ clearButton.addEventListener("click", function () {
 backspaceButton.addEventListener("click", function () {
     input[currentStat] = input[currentStat].slice(0, input[currentStat].length - 1);
     if (input[currentStat] === "") {
-        // mainDisplay.textContent = 0;
         input[currentStat] = "0"
     }
+    checkDecimal();
     updateMainDisplay();
     updateHistoryDisplay();
     consoleLog();
