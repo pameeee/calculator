@@ -156,7 +156,6 @@ backspaceButton.addEventListener("click", function () {
         input[currentStat] = "0"
     }
     checkDecimal();
-    updateMainDisplay();
-    // updateHistoryDisplay();
+    updateMainDisplay();    
     consoleLog();
 });
