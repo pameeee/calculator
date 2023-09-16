@@ -73,9 +73,7 @@ operatorButtons.forEach(function (button) {
 
         if (input[0] === "") {
             input[0] = "0";
-        }
-
-        if (input[0] && input[1] && !equal) {
+        } else if (input[0] && input[1] && !equal) {
             const result = calculate();
             input[0] = result;
             updateMainDisplay(result);
@@ -89,7 +87,7 @@ operatorButtons.forEach(function (button) {
         input[1] = "";
         currentStat = 1;
     });
-});
+}); // refactored
 
 equalButton.addEventListener("click", function () {
     decimalButton.disabled = false;
