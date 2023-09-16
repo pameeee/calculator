@@ -13,10 +13,10 @@ const mainDisplay = document.getElementById("mainDisplay");
 const historyDisplay = document.getElementById("historyDisplay");
 
 function consoleLog() {
-    console.log("Input: ", input);
-    console.log("Operator: ", operator);
-    console.log("Status: ", currentStat);
-    console.log("Decimal button disabled: ", decimalButton.disabled);
+    // console.log("Input: ", input);
+    // console.log("Operator: ", operator);
+    // console.log("Status: ", currentStat);
+    // console.log("Decimal button disabled: ", decimalButton.disabled);
 }
 
 function updateMainDisplay(result) {
@@ -81,7 +81,7 @@ function checkDecimal() {
 }
 
 digitButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function (e) {
 
         if (equal) {
             clearButton.click();
@@ -102,13 +102,15 @@ digitButtons.forEach(function (button) {
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
+        console.log("Current stat: ", currentStat);
         decimalButton.disabled = false;
 
-        if (input[currentStat] === "") {
-            input[currentStat] = "0";
+        if (input[0] === "") {
+            input[0] = "0";
         }
 
         if (input[0] && input[1] && !equal) {
+            console.log("Hello world"); // delete
             const result = calculate();
             input[0] = result;
             updateMainDisplay(result);
@@ -158,4 +160,12 @@ backspaceButton.addEventListener("click", function () {
     checkDecimal();
     updateMainDisplay();    
     consoleLog();
+});
+
+document.addEventListener("keydown", function (event) {
+    console.log("Event key: ", event.key);
+    const button = document.querySelector(`[data-key="${event.key}"]`);
+    if (button) {
+        button.click();
+    }
 });
