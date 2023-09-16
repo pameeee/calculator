@@ -55,12 +55,8 @@ function calculate() {
 } // not refactored
 
 function checkDecimal() {
-    if (input[currentStat].includes(".")) {
-        decimalButton.disabled = true;
-    } else {
-        decimalButton.disabled = false;
-    }
-}
+    decimalButton.disabled = input[currentStat].includes(".") ? true : false;
+} // refactored
 
 digitButtons.forEach(function (button) {
     button.addEventListener("click", function (e) {
