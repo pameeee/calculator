@@ -59,22 +59,13 @@ function checkDecimal() {
 } // refactored
 
 digitButtons.forEach(function (button) {
-    button.addEventListener("click", function (e) {
-
-        if (equal) {
-            clearButton.click();
-        }
-
-        if (currentStat === 0) {
-            input[currentStat] += button.innerHTML;
-        } else if (currentStat === 1) {
-            input[currentStat] += button.innerHTML;
-        }
-
+    button.addEventListener("click", function () {
+        if (equal) clearButton.click();
+        input[currentStat] += button.innerHTML;
         checkDecimal();
         updateMainDisplay();
     });
-});
+}); // refactored
 
 operatorButtons.forEach(function (button) {
     button.addEventListener("click", function () {
