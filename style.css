@@ -54,10 +54,10 @@ h1 {
     flex-grow: 1;
 }
 
-.top-buttons button {
-    flex-grow: 1;
-    width: 50%
-}
+    .top-buttons button {
+        flex-grow: 1;
+        width: 50%
+    }
 
 .the-rest-of-buttons {
     flex-grow: 6;
@@ -66,25 +66,24 @@ h1 {
     justify-content: space-between;
 }
 
-.the-rest-of-buttons button {   
-    min-width: 25%;
-    border: 1px solid #7979796e;
-    /* box-shadow: 2px 2px 4px red;  */
-}
+    .the-rest-of-buttons button, .top-buttons button {   
+        min-width: 25%;
+        border: 1px solid #7979796e;
+        /* box-shadow: 2px 2px 4px red;  */
+    }
 
-
-[data-key="-"] {
-    background-color: rgba(255, 0, 0, 0.1);
-}
-[data-key="+"] {
-    background-color: rgba(255, 251, 0, 0.1);
-}
-[data-key="*"] {
-    background-color: rgba(0, 255, 42, 0.1);
-}
-[data-key="/"] {
-    background-color: rgba(0, 255, 255, 0.1);
-}
+    [data-key="-"] {
+        background-color: rgba(255, 0, 0, 0.1);
+    }
+    [data-key="+"] {
+        background-color: rgba(255, 251, 0, 0.1);
+    }
+    [data-key="*"] {
+        background-color: rgba(0, 255, 42, 0.1);
+    }
+    [data-key="/"] {
+        background-color: rgba(0, 255, 255, 0.1);
+    }
   
   @media screen and (max-width: 480px) {
     .container {

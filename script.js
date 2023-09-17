@@ -14,13 +14,13 @@ const historyDisplay = document.getElementById("historyDisplay");
 
 function updateMainDisplay(result) {
     mainDisplay.textContent = result !== undefined ? result : input[currentStat];
-} // refactored
+} 
 
 function updateHistoryDisplay() {
     historyDisplay.textContent = equal
         ? input[0] + " " + operator + " " + input[1] + " " + "="
         : (historyDisplay.textContent = input[0] + " " + operator);
-} // refactored
+} 
 
 function calculate() {
     this.methods = {
@@ -52,23 +52,23 @@ function calculate() {
         ) / 100;
 
     return result.toString();
-} // not refactored
+} 
 
 function checkDecimal() {
-    decimalButton.disabled = input[currentStat].includes(".") ? true : false;
-} // refactored
+    decimalButton.disabled = input[currentStat].includes(".");
+} 
 
-digitButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
+digitButtons.forEach( button => {
+    button.addEventListener("click", () => {
         if (equal) clearButton.click();
         input[currentStat] += button.innerHTML;
         checkDecimal();
         updateMainDisplay();
     });
-}); // refactored
+}); 
 
-operatorButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
+operatorButtons.forEach(button => {
+    button.addEventListener("click", () => {
         decimalButton.disabled = false;
 
         if (input[0] === "") {
@@ -87,40 +87,33 @@ operatorButtons.forEach(function (button) {
         input[1] = "";
         currentStat = 1;
     });
-}); // refactored
+}); 
 
-equalButton.addEventListener("click", function () {
+equalButton.addEventListener("click", () => {
     decimalButton.disabled = false;
-
     equal = true;
-
     const result = calculate();
     updateMainDisplay(result);
     updateHistoryDisplay();
     input[0] = result;
-});
+}); 
 
-clearButton.addEventListener("click", function () {
+clearButton.addEventListener("click", () => {
     input = ["", ""];
     operator = "";
     currentStat = 0;
     equal = false;
     mainDisplay.textContent = 0;
     historyDisplay.textContent = "";
-});
+}); 
 
-backspaceButton.addEventListener("click", function () {
-    input[currentStat] = input[currentStat].slice(0, input[currentStat].length - 1);
-    if (input[currentStat] === "") {
-        input[currentStat] = "0"
-    }
+backspaceButton.addEventListener("click", () => {
+    input[currentStat] = input[currentStat].slice(0, -1) || "0  ";
     checkDecimal();
     updateMainDisplay();
-});
+}); 
 
 document.addEventListener("keydown", function (event) {
     const button = document.querySelector(`[data-key="${event.key}"]`);
-    if (button) {
-        button.click();
-    }
+    button?.click();
 });
